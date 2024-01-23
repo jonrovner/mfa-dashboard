@@ -15,13 +15,13 @@ export default async function handler(req, res) {
           client_id: process.env.AUTH0_CLIENT_ID,
           client_secret: process.env.AUTH0_CLIENT_SECRET,
           audience: process.env.AUTH0_ISSUER_BASE_URL + '/mfa/',
-          scope: 'openid profile read:sample',
+          scope: 'list:authenticators remove:authenticators',
           
         })
       };
 
       axios.request(options).then(function (response) {
-        //error response is expected;
+          //error response is expected;
         //console.log("RESPONSE DATA: ", response.data)
 
       }).catch(function (error) {

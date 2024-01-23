@@ -17,14 +17,8 @@ export default async function handler(req, res) {
         res.status(200).json({factors:response.data})
 
       }).catch(function (error) {
-        //console.log("ERROR GETTING MFA TOKEN", error);
-       
         console.log("ERROR GETTING FACTORS", error);
-
       });
-
-
-
 
     } else {
       // Handle any other HTTP method

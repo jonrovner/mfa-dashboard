@@ -19,11 +19,17 @@ export default function MFAlogin() {
     <>
     {mfa_token 
     ? <FactorsManager token={mfa_token} />
-    : <form action="/api/mfa-login/login" method='POST' onSubmit={handleSubmit}>
-        <input type="text" name='email' />
-        <input type="password" name='password' />
-        <button type='submit'></button>
-      </form>}
+    : <>
+    <p>Please enter your credentials to continue</p>
+    <form action="/api/mfa-login/login" method='POST' onSubmit={handleSubmit}>
+        email:<input type="text" name='email' />
+        <br />
+        password:<input type="password" name='password' />
+        <br />
+        
+        <button type='submit'>LOGIN</button>
+      </form>
+      </>}
       
     </>
   );
