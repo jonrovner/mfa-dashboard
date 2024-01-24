@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
       //console.log("REQUEST BODY", req.body)
 
-      const options = {
+      const mfaToken = {
         method: 'POST',
         url: process.env.AUTH0_ISSUER_BASE_URL + '/oauth/token',
         headers: {'content-type': 'application/x-www-form-urlencoded'},
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         })
       };
 
-      axios.request(options).then(function (response) {
+      axios.request(mfaToken).then(function (response) {
           //error response is expected;
         //console.log("RESPONSE DATA: ", response.data)
 
