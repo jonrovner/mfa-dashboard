@@ -13,6 +13,7 @@ useEffect(()=>{
         url: url,
         data: {token:token}
       };
+    axios.request(options).then( response => setFactors(response.data.factors))
 }, [])
 
 
@@ -35,7 +36,7 @@ return ( <>
     <Factors 
     factors={factors} 
     deleteFactor={deleteFactor}/>
-    :<div>You have no enrollments</div>}
+    :""}
     </> );
 }
 
