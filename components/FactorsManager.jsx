@@ -7,7 +7,7 @@ const FactorsManager = ({token}) => {
 const [factors, setFactors ] = useState([])
 
 useEffect(()=>{
-    const url =  '/api/mfa-login/list-factors' 
+    const url =  '/api/mfa/list-factors' 
     const options = {
         method: 'POST',
         url: url,
@@ -18,7 +18,7 @@ useEffect(()=>{
 
 
 const deleteFactor = (id, factorType, otp) => {
-    const url =  '/api/mfa-login/remove-factor' 
+    const url =  '/api/mfa/remove-factor' 
     const options = {
         method: 'POST',
         url: url,

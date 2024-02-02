@@ -5,20 +5,32 @@ export default async function handler(req, res) {
       //console.log("REQUEST BODY", req.body)
         const { id, token, oneTimePass, factorType } = req.body
 
-        /* const challenge = {
+        if (factorType == 'oob'){
+          
+          const challenge = {
             method: 'POST',
             url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/challenge',
             headers: {authorization: 'Bearer '+ token},
             data: new URLSearchParams({
                 mfa_token: token,
-                challenge_type:"otp",
+                challenge_type:"oob",
                 client_id: process.env.AUTH0_CLIENT_ID,
                 client_secret: process.env.AUTH0_CLIENT_SECRET,
                 authenticator_id: id
     
               })
           }
-          axios.request(challenge) */
+
+          try {
+            const pushResponse = await axios.request(challenge)
+            console.log("push response", pushResponse.data); 
+          } catch(error){
+            console.log("ERROR PUSHING", error)
+          }
+
+
+        }
+       
     
           if (factorType == "otp"){
 

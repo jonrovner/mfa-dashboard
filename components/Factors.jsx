@@ -15,13 +15,19 @@ const Factors = ({factors, deleteFactor}) => {
         <button onClick={()=>{
             const { id, authenticator_type} = factors.find(f => f.authenticator_type == "otp")
             deleteFactor(id, authenticator_type, otp)
-        }}>Delete Factor</button>
+        }}>Delete OTP Factor</button>
     </>
     : ""
     }
     {
     factors.find(f => f.authenticator_type == "oob")
-    ? <div>PUSH IS ENABLED</div>
+    ?<> 
+    <div>PUSH IS ENABLED</div>
+    <button onClick={()=>{
+        const { id, authenticator_type} = factors.find(f => f.id.slice(0,4) == "push")
+        deleteFactor(id, authenticator_type, "oob")
+        }}>push to delete</button>
+    </>
     :""
     }
 

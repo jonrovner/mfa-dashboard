@@ -20,7 +20,5 @@ export default async function handler(req, res) {
         console.log("ERROR GETTING FACTORS", error);
       });
 
-    } else {
-      // Handle any other HTTP method
-    }
+    } 
   }
