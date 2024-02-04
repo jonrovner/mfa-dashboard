@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         res.status(200).json({factors:response.data})
 
       }).catch(function (error) {
-        console.log("ERROR GETTING FACTORS", error);
+        console.log("ERROR GETTING FACTORS", error.response.data.error_description);
       });
 
     } 

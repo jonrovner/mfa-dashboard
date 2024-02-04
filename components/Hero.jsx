@@ -8,7 +8,7 @@ const Hero = () => (
     <h2 className="mb-4" data-testid="hero-title">
       Next.js Sample MFA Dashboard
     </h2>
-    <a href="/mfa-login">Go to MFA dashboard</a>
+    <a href="/mfa">Go to MFA dashboard</a>
 
     
   </div>

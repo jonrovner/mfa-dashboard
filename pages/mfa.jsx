@@ -20,7 +20,7 @@ export default function MFAlogin() {
             password: input.password
         }).then(response => setToken(response.data.token)) 
     }
-   
+   console.log("mfa token is ", mfa_token)
   return (
     <>
     {mfa_token 

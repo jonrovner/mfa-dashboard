@@ -2,9 +2,9 @@ import axios from "axios";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-      //console.log("REQUEST BODY", req.body)
-
-      const mfaToken = {
+     // console.log("REQ BODY", req.body)
+      
+      const mfaTokenRequest = {
         method: 'POST',
         url: process.env.AUTH0_ISSUER_BASE_URL + '/oauth/token',
         headers: {'content-type': 'application/x-www-form-urlencoded'},
@@ -20,14 +20,15 @@ export default async function handler(req, res) {
         })
       };
 
-      axios.request(mfaToken).then(function (response) {
+      axios.request(mfaTokenRequest).then(function (response) {
           //error response is expected;
-        //console.log("RESPONSE DATA: ", response.data)
+          console.log("response from login", response.data)
+         
 
       }).catch(function (error) {
-        //console.log("ERROR GETTING MFA TOKEN", error);
+        
         const { mfa_token } = error.response.data
-        //console.log("MFA TOKEN ", mfa_token);
+       
         res.status(200).json({token:mfa_token})
 
       });

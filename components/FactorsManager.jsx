@@ -28,14 +28,18 @@ const deleteFactor = (id, factorType, otp) => {
         console.log(response.status)
         setFactors(prevFactors => prevFactors.filter(f => f.id !== id))})
 }
+const enrollOtp = () => {
+  axios.post('/api/mfa/enroll-factor', {token})
+}
 
 return ( <>
-    <h5> MFA enrollments</h5>
+    <h5 className="text-center"> MFA enrollments</h5>
     {factors.length 
     ?
     <Factors 
     factors={factors} 
-    deleteFactor={deleteFactor}/>
+    deleteFactor={deleteFactor}
+    enrollFactor={enrollOtp}/>
     :""}
     </> );
 }
