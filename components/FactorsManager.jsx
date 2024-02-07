@@ -22,15 +22,24 @@ useEffect( () => {
 
 
 const deleteFactor = (id, factorType, otp) => {
-    const url =  '/api/mfa/remove-factor' 
-    const options = {
+    
+  const url =  '/api/mfa/remove-factor' 
+    
+    const options = token 
+    ? {
         method: 'POST',
         url: url,
         data: {token:token, id:id, oneTimePass:otp, factorType:factorType}
-      };
+      }
+      : {
+        method: 'GET',
+        url: url + '?id='+id,   
+      } ;
+
     axios.request(options).then( response => {
-        console.log(response.status)
-        setFactors(prevFactors => prevFactors.filter(f => f.id !== id))})
+        console.log("RESPONSE FROM REMOVE", response)
+        //setFactors(prevFactors => prevFactors.filter(f => f.id !== id))})
+})
 }
 
 const enrollOtp = () => {
@@ -38,15 +47,15 @@ const enrollOtp = () => {
 }
 
 return ( <>
-    <h5 className="text-center"> MFA enrollments</h5>
-    {factors.length > 0
-    ?
-    <Factors 
-    factors={factors} 
-    deleteFactor={deleteFactor}
-    enrollFactor={enrollOtp}/>
-    :""}
-    </> );
+  <h5 className="text-center"> MFA enrollments</h5>
+  {factors.length > 0
+  ?
+  <Factors 
+  factors={factors} 
+  deleteFactor={deleteFactor}
+  enrollFactor={enrollOtp}/>
+  :""}
+  </> );
 }
 
 export default FactorsManager;

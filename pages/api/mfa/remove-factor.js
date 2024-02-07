@@ -1,4 +1,5 @@
 const axios = require("axios").default;
+import { withApiAuthRequired, getSession, getAccessToken } from '@auth0/nextjs-auth0';
 
 function waitFor(delay) {
   return new Promise(resolve => {
@@ -6,7 +7,7 @@ function waitFor(delay) {
   });
 }
 
-export default async function handler(req, res) {
+export default withApiAuthRequired( async function handler(req, res) {
     if (req.method === 'POST') {
       //console.log("REQUEST BODY", req.body)
         const { id, token, oneTimePass, factorType } = req.body
@@ -23,7 +24,6 @@ export default async function handler(req, res) {
                 client_id: process.env.AUTH0_CLIENT_ID,
                 client_secret: process.env.AUTH0_CLIENT_SECRET,
                 authenticator_id: id
-    
               })
           }
 
@@ -58,6 +58,7 @@ export default async function handler(req, res) {
                 };
                 
                 axios.request(removeFactor).then(function (response) {
+                  console.log("response from remove, ", response);
                   console.log("response from remove", response.data);
                 }).catch(function (error) {
                   console.error(error);
@@ -78,10 +79,7 @@ export default async function handler(req, res) {
           }
 
 
-        } else 
-       
-    
-          if (factorType == "otp"){
+        } else if (factorType == "otp"){
 
             const verifyOTP = {
                 method: 'POST',
@@ -110,18 +108,27 @@ export default async function handler(req, res) {
               }).catch(function (error) {
                 console.error(error);
               });
-     
-    
             })
         }
-       
-        
-          
-      
-       
-
     } else {
-      // Handle any other HTTP method
+
+      const { accessToken } = await getAccessToken(req, res);
+      const { id } = req.query
+
+      const options = {
+        method: 'DELETE',
+        url: process.env.AUTH0_ISSUER_BASE_URL + '/mfa/authenticators/'+id,
+        headers: {'Authorization': 'Bearer '+ accessToken},
+        };
+  
+      axios.request(options).then(function (response) {
+        
+        console.log("RESPONSE FROM DELETE: ", response)
+        //res.status(200).json({factors:response.data})
+  
+      }).catch(function (error) {
+        console.log("ERROR DELETING FACTORS", error.response.data.error_description);
+      });
     }
-  }
+  })
 
