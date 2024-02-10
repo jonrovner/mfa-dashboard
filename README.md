@@ -11,7 +11,10 @@ This sample demonstrates the following use cases:
 - [Protecting client-side rendered pages](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx#L42-L45)
 - [Calling APIs](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/external.jsx)
 
-- [Authenticat with ROPG to obtain an mfa_token to query Auth0 MFA API](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa)
+- [Authenticate with ROPG to query Auth0 MFA API](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa)
+
+When you use the Resource Owner Password Flow to authenticate, you call the /oauth/token endpoint with the user's username and password.
+
 - [LOG IN  with NEW UNIVERSAL LOGIN, with Auth0 MFA audience.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#universal-login)
 - [Showing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
 - Removing enrolled authenticators.
