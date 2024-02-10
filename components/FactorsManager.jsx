@@ -36,10 +36,15 @@ const deleteFactor = (id, factorType, otp) => {
         url: url + '?id='+id,   
       } ;
 
+      
+
     axios.request(options).then( response => {
         console.log("RESPONSE FROM REMOVE", response)
-        //setFactors(prevFactors => prevFactors.filter(f => f.id !== id))})
-})
+
+        
+
+    })
+  
 }
 
 const enrollOtp = () => {

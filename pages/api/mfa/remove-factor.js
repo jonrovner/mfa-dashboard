@@ -111,6 +111,7 @@ export default withApiAuthRequired( async function handler(req, res) {
             })
         }
     } else {
+      //method is GET
 
       const { accessToken } = await getAccessToken(req, res);
       const { id } = req.query
@@ -124,6 +125,10 @@ export default withApiAuthRequired( async function handler(req, res) {
       axios.request(options).then(function (response) {
         
         console.log("RESPONSE FROM DELETE: ", response)
+        if (response.status == 204){
+          res.redirect(302, '/mfa')
+        }
+        
         //res.status(200).json({factors:response.data})
   
       }).catch(function (error) {

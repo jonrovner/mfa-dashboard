@@ -11,9 +11,9 @@ This sample demonstrates the following use cases:
 - [Protecting client-side rendered pages](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx#L42-L45)
 - [Calling APIs](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/external.jsx)
 
-- LOG IN with ROPG to obtain an mfa_token to query Auth0 MFA API
-- LOG IN  with NEW UNIVERSAL LOGIN, with Auth0 MFA audience.
-- Showing enrolled authenticators.
+- [Authenticat with ROPG to obtain an mfa_token to query Auth0 MFA API](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa)
+- [LOG IN  with NEW UNIVERSAL LOGIN, with Auth0 MFA audience.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#universal-login)
+- [Showing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
 - Removing enrolled authenticators.
 - Request an  MFA reset
 - Enroll authenticator
@@ -26,13 +26,7 @@ Use `npm` to install the project dependencies:
 npm install
 ```
 
-## Configuration
 
-### Create an API
-
-For the **External API** page to work, you will need to [create an API](https://auth0.com/docs/authorization/apis) using the [management dashboard](https://manage.auth0.com/#/apis). This will give you an API Identifier that you can use in the `AUTH0_AUDIENCE` environment variable below. Then you will need to [add a permission](https://auth0.com/docs/get-started/dashboard/add-api-permissions) named `read:shows` to your API. To get your app to ask for that permission, include it in the value of the `AUTH0_SCOPE` environment variable.
-
-If you do not wish to use an API or observe the API call working, you should not specify the `AUTH0_AUDIENCE` and `AUTH0_SCOPE` values in the next steps.
 
 ### Configure credentials
 
