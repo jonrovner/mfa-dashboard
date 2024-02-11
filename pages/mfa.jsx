@@ -7,13 +7,6 @@ import MfaLoginForm from '../components/MfaLoginForm';
 export default function MFAlogin() {
 
     const [mfa_token, setToken] = useState("")
-    const [factors, setFactors ] = useState([])
-    
-    useEffect(()=>{
-      axios.get('/api/mfa/list-factors')
-      .then(res => setFactors(res.data.factors))
-      .catch(err=>{console.log(err);}) 
-    },[]) 
     
     const handleSubmit = (e, input) => {   
       console.log("submiting : ", input);
@@ -28,10 +21,9 @@ export default function MFAlogin() {
   return (
    <>
     {mfa_token 
-    ? <FactorsManager token={mfa_token} authenticators={factors} />
-    : factors.length > 0 
-      ? <FactorsManager authenticators={factors}/>
-      : <MfaLoginForm handleSubmit={handleSubmit} />  
+    ? <FactorsManager token={mfa_token} />
+    
+    : <MfaLoginForm handleSubmit={handleSubmit} />  
     }
   </>)
 }

@@ -1,6 +1,12 @@
 # Auth0 Next.js SDK Sample Application
 
-This sample demonstrates the integration of [Auth0 Next.js SDK](https://github.com/auth0/nextjs-auth0) into a Next.js MFA DASHBOARD application created using [create-next-app](https://nextjs.org/docs/api-reference/create-next-app). 
+This sample demonstrates the integration of [Auth0 Next.js SDK](https://github.com/auth0/nextjs-auth0) into a MFA DASHBOARD application created using [create-next-app](https://nextjs.org/docs/api-reference/create-next-app). 
+
+Auth0 provides a built-in multi-factor authentication (MFA) enrollment and authentication flow using Universal Login.
+
+The [MFA API](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/mfa-api) allows you to build an interface to let users manage their own authentication factors.
+
+To use the MFA API, you must enable the MFA grant type for your application. To enable the MFA grant in the Auth0 Dashboard, go to Dashboard > Applications > Advanced Settings > Grant Types and select MFA. See Enable Multi-Factor Authentication for details.
 
 
 This sample demonstrates the following use cases:
@@ -9,14 +15,13 @@ This sample demonstrates the following use cases:
 - [Logout](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/components/NavBar.jsx#L80-L82)
 - [Showing the user profile](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx)
 - [Protecting client-side rendered pages](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx#L42-L45)
-- [Calling APIs](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/external.jsx)
 
 - [Authenticate with ROPG to query Auth0 MFA API](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa)
 
-When you use the Resource Owner Password Flow to authenticate, you call the /oauth/token endpoint with the user's username and password.
-
 - [LOG IN  with NEW UNIVERSAL LOGIN, with Auth0 MFA audience.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#universal-login)
+
 - [Showing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
+
 - Removing enrolled authenticators.
 - Request an  MFA reset
 - Enroll authenticator

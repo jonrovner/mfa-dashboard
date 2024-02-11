@@ -37,21 +37,6 @@ const NavBar = () => {
               </NavItem>
               {user && (
                 <>
-                  <NavItem>
-                    <PageLink href="/csr" className="nav-link" testId="navbar-csr">
-                      Client-side rendered page
-                    </PageLink>
-                  </NavItem>
-                  <NavItem>
-                    <PageLink href="/ssr" className="nav-link" testId="navbar-ssr">
-                      Server-side rendered page
-                    </PageLink>
-                  </NavItem>
-                  <NavItem>
-                    <PageLink href="/external" className="nav-link" testId="navbar-external">
-                      External API
-                    </PageLink>
-                  </NavItem>
                 </>
               )}
             </Nav>

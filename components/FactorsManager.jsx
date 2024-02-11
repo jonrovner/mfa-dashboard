@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Factors from "./Factors";
 
-const FactorsManager = ({token, authenticators}) => {
+const FactorsManager = ({token}) => {
 
-const [factors, setFactors ] = useState([...authenticators])
+const [factors, setFactors ] = useState([])
 
 useEffect( () => {
-    if (authenticators.length < 1 && token.length > 0){
 
       const url =  '/api/mfa/list-factors' 
       const options = {
@@ -17,7 +16,7 @@ useEffect( () => {
         };
       axios.request(options).then( response => setFactors(response.data.factors))
 
-    }
+    
 }, [])
 
 
@@ -25,18 +24,11 @@ const deleteFactor = (id, factorType, otp) => {
     
   const url =  '/api/mfa/remove-factor' 
     
-    const options = token 
-    ? {
+    const options =  {
         method: 'POST',
         url: url,
         data: {token:token, id:id, oneTimePass:otp, factorType:factorType}
-      }
-      : {
-        method: 'GET',
-        url: url + '?id='+id,   
-      } ;
-
-      
+      };
 
     axios.request(options).then( response => {
         console.log("RESPONSE FROM REMOVE", response)
