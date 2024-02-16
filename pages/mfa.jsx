@@ -3,8 +3,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import FactorsManager from '../components/FactorsManager';
 import MfaLoginForm from '../components/MfaLoginForm';
+import {  withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default function MFAlogin() {
+ function MFAlogin() {
 
     const [mfa_token, setToken] = useState("")
     
@@ -27,3 +28,4 @@ export default function MFAlogin() {
     }
   </>)
 }
+export default withPageAuthRequired(MFAlogin)

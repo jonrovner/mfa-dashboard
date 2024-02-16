@@ -18,13 +18,11 @@ This sample demonstrates the following use cases:
 
 - [Authenticate with ROPG to query Auth0 MFA API](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa)
 
-- [LOG IN  with NEW UNIVERSAL LOGIN, with Auth0 MFA audience.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#universal-login)
-
 - [Showing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
 
-- Removing enrolled authenticators.
-- Request an  MFA reset
-- Enroll authenticator
+- [Removing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#delete-authenticators)
+
+
 
 ## Project setup
 

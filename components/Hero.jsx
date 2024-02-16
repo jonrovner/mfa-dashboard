@@ -6,9 +6,9 @@ const Hero = () => (
     <h2 className="mb-4" data-testid="hero-title">
       Next.js Sample MFA Dashboard
     </h2>
-    <a href="/api/mfa/login-universal">Log in with Auth0 to access MFA dashboard</a>
+    
     <br />
-    <a href="/mfa">Log in with Password</a>
+    <a href="/mfa">Log in with your Password</a>
 
 
     
