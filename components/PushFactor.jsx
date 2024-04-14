@@ -7,7 +7,7 @@ import React, {useState} from "react";
             <h6 className="card-title text-dark text-center">Push notification is enabled</h6>
             <div className="btn btn-primary" onClick={()=>{
                 const { id, authenticator_type} = factor
-                deleteFactor(id, authenticator_type, null)
+                deleteFactor(factor)
                 }}>request push to delete</div>
         </div>
     )

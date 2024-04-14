@@ -1,18 +1,21 @@
-const axios = require("axios").default;
-import { withApiAuthRequired, getSession, getAccessToken } from '@auth0/nextjs-auth0';
 
-function waitFor(delay) {
-  return new Promise(resolve => {
-    setTimeout(resolve, delay);
-  });
-}
+import { deleteFactor } from "../../../utils/factorsManager";
 
-export default withApiAuthRequired( async function handler(req, res) {
-    if (req.method === 'POST') {
-      //console.log("REQUEST BODY", req.body)
-        const { id, token, oneTimePass, factorType } = req.body
-        
-        if (factorType == 'oob'){
+export default async function handler(req, res) {
+    
+  if (req.method === 'POST') {
+
+   console.log("REMOVE API REQUEST BODY", req.body)
+      
+      const { token, factor, otp} = req.body
+      const result = await deleteFactor(token, factor, otp)
+      console.log("result is : ", result)
+      
+      //res.status(200).json({message: result.data.message})
+
+      }
+
+}   /* if (factorType == 'oob'){
           
           const challenge = {
             method: 'POST',
@@ -136,4 +139,4 @@ export default withApiAuthRequired( async function handler(req, res) {
       });
     }
   })
-
+ */

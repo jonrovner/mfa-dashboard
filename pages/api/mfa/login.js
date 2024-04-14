@@ -15,7 +15,7 @@ export default async function handler(req, res) {
           client_id: process.env.AUTH0_CLIENT_ID,
           client_secret: process.env.AUTH0_CLIENT_SECRET,
           audience: process.env.AUTH0_ISSUER_BASE_URL + '/mfa/',
-          scope: 'list:authenticators remove:authenticators',
+          scope: 'list:authenticators remove:authenticators enroll',
           
         })
       };

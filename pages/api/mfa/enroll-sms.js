@@ -1,22 +1,15 @@
-var axios = require("axios").default;
+import { enrollSMS } from "../../../utils/factorsManager"
+
 
 export default async function handler(req, res) {
     
     const {token, number} = req.body
 
-    let options = {
-        method: 'POST',
-        url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/associate',
-        headers: {authorization: 'Bearer '+token, 'content-type': 'application/json'},
-        data: {authenticator_types: ['oob'], oob_channels: ['sms'], phone_number: number}
-    };
+    const data = await enrollSMS(token, number)
+    if (data) {
+        res.status(200).json({data:data})
+    }
     
-    axios.request(options).then(function (response) {
-    console.log(response.data);
-    }).catch(function (error) {
-    console.error(error);
-    });
-
 }
 
 
