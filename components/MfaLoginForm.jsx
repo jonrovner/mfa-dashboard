@@ -5,7 +5,7 @@ const MfaLoginForm = ({handleSubmit}) => {
     const handleInput = (e) => {
         setInput({...input, [e.target.name]: e.target.value})
       }
-    console.log("input is ", input)
+    
     return(
     <>
     <p>Please enter your credentials to continue</p>

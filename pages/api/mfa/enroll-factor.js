@@ -1,4 +1,4 @@
-import { listFactors, pollForToken, chanllengeWith, enrollAnotherPush } from "../../../utils/factorsManager";
+import { listFactors, pollForToken, chanllengeWithPush, enrollAnotherPush } from "../../../utils/factorsManager";
 
 export default async function handler(req, res) {
    
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         if (pushFactor.id){
           
           //challenge with existing
-          const data = await chanllengeWith(pushFactor, token)
+          const data = await chanllengeWithPush(pushFactor, token)
           let {oob_code} = data
 
           //poll the token endpoint

@@ -1,23 +1,25 @@
 import axios from "axios";
 
 export const listFactors = async (token) => {
-    console.log("LISTING FACTORS");
-    const options = {
+    
+    const listFactorsRequest = {
         method: 'GET',
         url: process.env.AUTH0_ISSUER_BASE_URL + '/mfa/authenticators',
         headers: { 'Authorization': 'Bearer '+ token },
       };
-      try{
-        const { data } = await axios.request(options)
-        console.log("FACTORS: ", data)
-        return data
-      } catch(e) {
+      try {
+        const { data } = await axios.request(listFactorsRequest)
+        console.log("FACTORS : ", data)
+        return [...data.filter(factor => factor.active )]
+      } 
+      catch(e) {
         console.log("ERROR LISTING FACTORS", e);
       }
 }
 
-export const chanllengeWith = async (factor, token) => {
-    const challenge = {
+export const chanllengeWithPush = async (factor, token) => {
+    
+  const challengeRequest = {
         method: 'POST',
         url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/challenge',
         headers: {authorization: 'Bearer '+ token},
@@ -28,49 +30,55 @@ export const chanllengeWith = async (factor, token) => {
         client_secret: process.env.AUTH0_CLIENT_SECRET,
         authenticator_id: factor.id})
       }
-    try{
-        const {data} = await axios.request(challenge)
-        console.log("data from challenge: ", data);
+    try {
+        const {data} = await axios.request(challengeRequest)
         return data
 
     } catch(e){console.log("ERROR CHALLENGING > ", e);}
 }
 
-export const deleteFactor = async (token, factor, otp) => {
-  
-    if (factor.authenticator_type == "oob"){
-        
-      const {oob_code} = await chanllengeWith(factor, token)
-        
-    }
+export const verifyOTP = async (token, otp) => {
+
+  const verifyRequest = {
+    method: 'POST',
+    url: process.env.AUTH0_ISSUER_BASE_URL +'/oauth/token',
+    data: new URLSearchParams({
+        grant_type: "http://auth0.com/oauth/grant-type/mfa-otp",
+        client_id: process.env.AUTH0_CLIENT_ID,
+        client_secret: process.env.AUTH0_CLIENT_SECRET,
+        mfa_token: token,
+        otp: otp
+      })
+  }
+
+  try {
+    const {data} = await axios.request(verifyRequest)
+    return data.access_token
+
+  } catch (e) {
+
+    console.log("ERROR VERIFYING: ", e.response.data);
     
-    else if (factor.authenticator_type == "otp"){
+  }
 
-      const verifyOTP = {
-        method: 'POST',
-        url: process.env.AUTH0_ISSUER_BASE_URL +'/oauth/token',
-        data: new URLSearchParams({
-            grant_type: "http://auth0.com/oauth/grant-type/mfa-otp",
-            client_id: process.env.AUTH0_CLIENT_ID,
-            client_secret: process.env.AUTH0_CLIENT_SECRET,
-            mfa_token: token,
-            otp: otp
-          })
-      }
 
-      try {
 
-        axios.request(verifyOTP).then( response => {
-          const { access_token } = response.data
-         // console.log("token from verify", access_token);
-      
+}
+
+export const deleteFactorWithOTP = async (token, factor, otp) => {
+  
+    if (factor.authenticator_type == "otp"){
+
+      try {       
+          const { access_token } = await verifyOTP(token, otp)
+         
           var removeFactor = {
           method: 'DELETE',
           url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/authenticators/'+factor.id,
           headers: {authorization: 'Bearer '+ access_token}
         };
         
-          axios.request(removeFactor).then(function (response) {
+          axios.request(removeFactor).then( response => {
             console.log("response from remove", response.data);
             if (response.status == 204 ) {
               return {message: "otp succsessfully deleted"}
@@ -78,10 +86,12 @@ export const deleteFactor = async (token, factor, otp) => {
           }).catch(function (error) {
             console.error("ERROR FINAL", error);
         });
-      })
+      } catch (e) {
+        console.log("ERROR DELETING FACTOR: ", e);
+      }
 
 
-      }catch(e){console.log("ERROR DELETING OTP", e);}
+     
 
     }
 
@@ -191,8 +201,57 @@ export const enrollSMS = async (token, number) => {
 
 }
 
+export const challengeWithEmail = async (token, factor) => {
+
+  let emailchallengeRequest = {
+    method: 'POST',
+    url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/challenge',
+    headers: {authorization: 'Bearer '+token, 'content-type': 'application/json'},
+    data: {
+      challenge_type: 'oob', 
+      client_id: process.env.AUTH0_CLIENT_ID,
+      client_secret: process.env.AUTH0_CLIENT_SECRET,
+      authenticator_id: factor.id, 
+      mfa_token: token}
+  };
+
+  try {
+
+    const response = await axios.request(emailchallengeRequest)
+    return response.data
+  } catch (e) {
+    console.log("ERROR REQUESTING EMAIL CHALLENGE: ", e);
+  }
+
+}
+
+export const confirmEmailchallenge = async (token, oob_code, user_code) => {
+
+  let confirmRequest = {
+    method: 'POST',
+    url: process.env.AUTH0_ISSUER_BASE_URL+'/oauth/token',
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
+    data: new URLSearchParams({
+      grant_type: 'http://auth0.com/oauth/grant-type/mfa-oob',
+      client_id: process.env.AUTH0_CLIENT_ID,
+      client_secret: process.env.AUTH0_CLIENT_SECRET,
+      mfa_token: token,
+      oob_code: oob_code,
+      binding_code: user_code
+    })
+  };
+  try {
+    const response = await axios.request(confirmRequest)
+    return response.data
+
+  } catch(e){
+    console.log("ERROR CONFIRMING EMAIL OTP", e);
+  }
+
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-export default {listFactors, chanllengeWith} 
+export default {listFactors, chanllengeWithPush, deleteFactorWithOTP} 

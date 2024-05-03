@@ -1,17 +1,24 @@
 
-import { deleteFactor } from "../../../utils/factorsManager";
+import { deleteFactorWithOTP } from "../../../utils/factorsManager";
 
 export default async function handler(req, res) {
     
   if (req.method === 'POST') {
 
-   console.log("REMOVE API REQUEST BODY", req.body)
+   //console.log("REMOVE API REQUEST BODY", req.body)
       
       const { token, factor, otp} = req.body
-      const result = await deleteFactor(token, factor, otp)
-      console.log("result is : ", result)
       
-      //res.status(200).json({message: result.data.message})
+      try{
+
+        const result = await deleteFactorWithOTP(token, factor, otp)
+        console.log("result is : ", result)
+        
+        res.status(200).json({message: result.data.message})
+
+      } catch(e){
+        console.log("ERROR DELETING : ", e.response.data);
+      }
 
       }
 
