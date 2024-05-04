@@ -10,7 +10,7 @@ import {  withPageAuthRequired } from '@auth0/nextjs-auth0';
     const [mfa_token, setToken] = useState("")
     
     const handleSubmit = (e, input) => {   
-      console.log("submiting : ", input);
+      //console.log("submiting : ", input);
         e.preventDefault();
         const url = '/api/mfa/login'
         axios.post(url, {

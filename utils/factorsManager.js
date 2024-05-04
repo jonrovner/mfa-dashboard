@@ -216,9 +216,10 @@ export const challengeWithEmail = async (token, factor) => {
   };
 
   try {
-
     const response = await axios.request(emailchallengeRequest)
+    //console.log("RESPONSE FROM AUTH0", response.data);
     return response.data
+    
   } catch (e) {
     console.log("ERROR REQUESTING EMAIL CHALLENGE: ", e);
   }
@@ -242,11 +243,36 @@ export const confirmEmailchallenge = async (token, oob_code, user_code) => {
   };
   try {
     const response = await axios.request(confirmRequest)
+    console.log("RESPONSE RROM AUTH0", response.data);
     return response.data
 
   } catch(e){
     console.log("ERROR CONFIRMING EMAIL OTP", e);
   }
+
+}
+
+export const enrollAfterChallenge = async (access_token) => {
+
+    
+  let options = {
+    method: 'POST',
+    url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/associate',
+    headers: {
+      authorization: 'Bearer '+access_token, 
+      'content-type': 'application/json'},
+    data: {authenticator_types: ['otp']}
+  };
+try {
+
+  const response = await axios.request(options)
+  return response.data
+}
+ 
+  catch(error) {
+    console.error(error);
+  };
+
 
 }
 

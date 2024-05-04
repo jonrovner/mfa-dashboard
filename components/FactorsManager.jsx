@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import OtpFactor from "./OtpFactor";
+
 import EmailChalenge from "./EmailChallenge";
 import Device from "./Device";
 import Qrcode from "./Qrcode";
@@ -22,17 +22,6 @@ useEffect( () => {
 }, [])
 
 
-const deleteFactor = (factor, otp) => {
-  const options =  {
-        method: 'POST',
-        url: '/api/mfa/remove-factor',
-        data: {token:token, factor:factor, otp:otp}
-      };
-  axios.request(options).then( response => {
-        console.log("RESPONSE FROM REMOVE", response)
-    })
-}
-
 const enroll = async (type) => {
 
   const {data} = await axios.post('/api/mfa/enroll-factor', {token, type})
@@ -48,33 +37,28 @@ const enroll = async (type) => {
 const enrollSms = async () => {
   const res = await axios.post('/api/mfa/enroll-sms', {number, token})
   console.log("response from sms api", res)
-
 }
 
 console.log("factors : ", factors);
 //console.log("barcode : ", barcode_uri);
 
 
-
-
-
 return (
    <>
-  <h5 className="text-center"> Enrolled Device</h5>
+  
 
   {
-    
     factors.length > 1 && factors[1].type =='otp' 
     ? <Device factors={factors} token={token}/>
     : factors.length == 1 ? <EmailChalenge factors={factors} token={token}/> : ""
   }
 
-  {factors.find(f => f.authenticator_type == "otp" && f.active == true)
+  {/* {factors.find(f => f.authenticator_type == "otp" && f.active == true)
         ? <OtpFactor 
             factor={factors.find(f => f.authenticator_type == "otp" && f.active == true)}
             deleteFactor={deleteFactor} />
         : <div className="btn btn-primary mb-2" onClick={()=>enroll("otp")}>ENROLL OTP</div>  
-  }
+  } */}
 
 
   <div className="btn btn-primary mb-2" onClick={()=>{enroll("oob")}}>ENROLL NEW DEVICE</div>
