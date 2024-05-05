@@ -122,25 +122,6 @@ export const pollForToken = async (code, token) => {
       } 
 }
 
-export const enrollAnotherPush = async (mfatoken) => {
-
-  const enrollRequest = {
-    method: 'POST',
-    url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/associate',
-    headers: {authorization: 'Bearer '+ mfatoken},
-     data: {
-      authenticator_types: ['oob'], 
-      oob_channels: ['auth0']
-    }
-
-  }
-  try {
-    const {data} = await axios.request(enrollRequest)
-    console.log("DATA FROM ENROLL", data)
-    return data
-  }catch(e){console.log("ERROR FROM ENROLLMENT: ", e);}
-}
-
 export const enrollSMS = async (token, number) => {
 
   let options = {
@@ -247,7 +228,6 @@ export const confirmEmailchallenge = async (token, oob_code, user_code) => {
 
 export const enrollAfterChallenge = async (access_token) => {
 
-    
   let options = {
     method: 'POST',
     url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/associate',
@@ -257,14 +237,12 @@ export const enrollAfterChallenge = async (access_token) => {
     data: {authenticator_types: ['oob'], oob_channels:['auth0']}
   };
 try {
-
   const response = await axios.request(options)
   return response.data
 }
- 
-  catch(error) {
+catch(error) {
     console.error(error);
-  };
+};
 
 
 }
