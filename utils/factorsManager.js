@@ -71,7 +71,7 @@ export const deleteFactor = async (factorID, access_token ) => {
       try {       
           let removeFactor = {
           method: 'DELETE',
-          url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/authenticators/'+factorID,
+          url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/authenticators/'+ encodeURIComponent(factorID),
           headers: {authorization: 'Bearer '+ access_token}
         };
         

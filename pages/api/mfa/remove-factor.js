@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     
   if (req.method === 'POST') {
 
-   //console.log("REMOVE API REQUEST BODY", req.body)
+   console.log("REMOVE API REQUEST BODY", req.body)
       
       const { factorID, access_token} = req.body
       

@@ -29,16 +29,14 @@ const enrollDevice = async () => {
   const {data} = await axios.post('/api/mfa/poll-for-token', {oob_code:response.data.oob_code, token:access_token})
   
   console.log("RESPONSE FROM POLLING", data)
-}
-
-const confirmEnrollment = async () => {
-  const response = await axios.post('/api/mfa/confirm-otp', {token, otp})
-  console.log("CONFIRMATION RESPONSE : ", response.data);
-  
-  const newfactors = await axios.post('/api/mfa/list-factors', {token})
+  if (data.access_token){
+    setBarcode("")
+    setToken("")
+    const newfactors = await axios.post('/api/mfa/list-factors', {token})
   console.log("new factors?", newfactors.data.factors);
   setFactors(newfactors.data.factors)
 
+  }
 }
 
 const deleteFactor = async () => {
@@ -101,9 +99,7 @@ return (
         barcode_uri &&  
         <>
           <Qrcode barcode_uri={barcode_uri} />
-          <label htmlFor="otp">enter otp</label>
-          <input type="text" onChange={(e)=>setOTP(e.target.value)}/>
-          <button onClick={confirmEnrollment}>submit</button>
+          
         </>
       }
 
