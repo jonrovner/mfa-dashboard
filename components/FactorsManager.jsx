@@ -21,27 +21,32 @@ const enrollSms = async () => {
 
 const enrollDevice = async () => {
   const response = await axios.post('/api/mfa/enroll-post-challenge', {access_token})
- //console.log("response from api : ", response.data);
+  //console.log("response from api : ", response.data);
   
   setBarcode(response.data.barcode_uri)
   setEnrollment(response.data)
   
   const {data} = await axios.post('/api/mfa/poll-for-token', {oob_code:response.data.oob_code, token:access_token})
+  //console.log("RESPONSE FROM POLLING", data)
   
-  console.log("RESPONSE FROM POLLING", data)
   if (data.access_token){
     setBarcode("")
     setToken("")
     const newfactors = await axios.post('/api/mfa/list-factors', {token})
-  console.log("new factors?", newfactors.data.factors);
-  setFactors(newfactors.data.factors)
-
+    //console.log("new factors?", newfactors.data.factors);
+    setFactors(newfactors.data.factors)
   }
 }
 
 const deleteFactor = async () => {
   const {data} = await axios.post('/api/mfa/remove-factor', {factorID, access_token})
   console.log("response from remove api", data);
+  if (data){
+    const newfactors = await axios.post('/api/mfa/list-factors', {token})
+    //console.log("new factors?", newfactors.data.factors);
+    setFactors(newfactors.data.factors)
+
+  }
 }
 
 console.log("factors : ", factors);

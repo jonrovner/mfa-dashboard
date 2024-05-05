@@ -75,11 +75,12 @@ export const deleteFactor = async (factorID, access_token ) => {
           headers: {authorization: 'Bearer '+ access_token}
         };
         
-         const {data} = await axios.request(removeFactor)
-            console.log("response from remove", data);
-            if (response.status == 204 ) {
-              return data
+         const response = await axios.request(removeFactor)
+            console.log("response from remove", response);
+            if (response.status == 204){
+              return "OK"
             }
+            
           } catch(error) {
             console.error("ERROR FINAL", error);
         }
@@ -87,9 +88,7 @@ export const deleteFactor = async (factorID, access_token ) => {
 
      
 
-    }
-
-
+}
 
 export const pollForToken = async (code, token) => {
     while (true){

@@ -12,9 +12,9 @@ export default async function handler(req, res) {
       try {
 
         const result = await deleteFactor(factorID, access_token)
-        console.log("result is : ", result)
         
-        res.status(200).json(result)
+        
+        res.status(200).json({result:result})
 
       } catch(e){
         console.log("ERROR DELETING : ", e.response.data);
