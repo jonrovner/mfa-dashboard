@@ -53,7 +53,7 @@ export const verifyOTP = async (token, otp) => {
 
   try {
     const {data} = await axios.request(verifyRequest)
-    return data.access_token
+    return data
 
   } catch (e) {
 
@@ -65,37 +65,31 @@ export const verifyOTP = async (token, otp) => {
 
 }
 
-export const deleteFactorWithOTP = async (token, factor, otp) => {
+export const deleteFactor = async (factorID, access_token ) => {
   
-    if (factor.authenticator_type == "otp"){
-
+    
       try {       
-          const { access_token } = await verifyOTP(token, otp)
-         
-          var removeFactor = {
+          let removeFactor = {
           method: 'DELETE',
-          url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/authenticators/'+factor.id,
+          url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/authenticators/'+factorID,
           headers: {authorization: 'Bearer '+ access_token}
         };
         
-          axios.request(removeFactor).then( response => {
-            console.log("response from remove", response.data);
+         const {data} = await axios.request(removeFactor)
+            console.log("response from remove", data);
             if (response.status == 204 ) {
-              return {message: "otp succsessfully deleted"}
+              return data
             }
-          }).catch(function (error) {
+          } catch(error) {
             console.error("ERROR FINAL", error);
-        });
-      } catch (e) {
-        console.log("ERROR DELETING FACTOR: ", e);
-      }
+        }
 
 
      
 
     }
 
-}
+
 
 export const pollForToken = async (code, token) => {
     while (true){
@@ -217,9 +211,9 @@ export const challengeWithEmail = async (token, factor) => {
 
   try {
     const response = await axios.request(emailchallengeRequest)
-    //console.log("RESPONSE FROM AUTH0", response.data);
+    console.log("RESPONSE FROM AUTH0", response.data);
     return response.data
-    
+
   } catch (e) {
     console.log("ERROR REQUESTING EMAIL CHALLENGE: ", e);
   }
@@ -261,7 +255,7 @@ export const enrollAfterChallenge = async (access_token) => {
     headers: {
       authorization: 'Bearer '+access_token, 
       'content-type': 'application/json'},
-    data: {authenticator_types: ['otp']}
+    data: {authenticator_types: ['oob'], oob_channels:['auth0']}
   };
 try {
 
@@ -280,4 +274,4 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-export default {listFactors, chanllengeWithPush, deleteFactorWithOTP} 
+export default {listFactors, chanllengeWithPush, deleteFactor} 

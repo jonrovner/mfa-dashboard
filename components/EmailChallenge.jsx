@@ -1,70 +1,45 @@
-
-
 import { useState } from "react";
 import axios from "axios";
 import Qrcode from "./Qrcode";
 
-const EmailChalenge = ({token}) => {
+
+const EmailChalenge = ({ token, setToken}) => {
 
     const [code, setCode] = useState("")
     const [oob_code, setOob] = useState("")
-    const [access_token, setToken] = useState("")
-    const [barcode_uri, setBarcode] = useState("")
-    const [otp, setOTP] = useState("")
-
+   
 
     const onChallengeRequest = async () => {
-        const response = await axios.post('/api/mfa/challenge-email', {token})
+        const response = await axios.post('/api/mfa/challenge', {token:token, type:'email'})
         //console.log("RESPONSE FROM API: ", response.data.data);
         setOob(response.data.data.oob_code)
     }
 
     const onSubmitCode = async () => {
         const response = await axios.post('/api/mfa/confirm-email-challenge', {token, oob_code, code} )
-        console.log("response from confirm api", response)
+        //console.log("response from confirm api", response)
         setToken(response.data.data.access_token)
+        setCode("")
     }
 
-    const enrollDevice = async () => {
-        const response = await axios.post('/api/mfa/enroll-post-challenge', {access_token})
-        console.log("response from api : ", response.data.barcode_uri);
-        setBarcode(response.data.barcode_uri)
-
-    }
-
-    const confirmEnrollment = async () => {
-        const response = await axios.post('/api/mfa/confirm-otp', {otp})
-        console.log("CONFIRMATION RESPONSE : ", response.data);
-    }
     
     return (
-    <div>
+    <div >
         <p>Your email is enabled for MFA</p>
         <button className="btn btn-primary mb-2" onClick={onChallengeRequest}>send OTP to email</button>    
-        {(oob_code !== '')&&
-
-        <div>
-        <label htmlFor="id">enter the code sent to your email</label>
-        <input id="code" type="text" onChange={(e)=>setCode(e.target.value)}/>
-        <br />
-        <button className="btn btn-primary mb-2" disabled={oob_code == '' } onClick={onSubmitCode}>submit code</button>
         {
-            (access_token !== '') &&
-            
-            <button className="btn btn-primary mb-2" onClick={enrollDevice}>enroll device</button>
-            
+        (oob_code !== '') &&
 
-        }
-        {
-         barcode_uri && 
-         <>
-         <Qrcode barcode_uri={barcode_uri} />
-         <label htmlFor="otp">enter otp</label>
-         <input type="text" onChange={(e)=>setOTP(e.target.value)}/>
-         <button onClick={confirmEnrollment}>submit</button>
-         </>
-          }
-        </div>
+            <div>
+                <label htmlFor="id">enter the code sent to your email</label>
+                <input id="code" type="text" onChange={(e)=>setCode(e.target.value)}/>
+                <br />
+                <button 
+                    className="btn btn-primary mb-2" 
+                    disabled={oob_code == '' } 
+                    onClick={onSubmitCode}>submit code
+                </button>
+            </div>
 
         }
 

@@ -20,9 +20,13 @@ This sample demonstrates the following use cases:
 
 - [Showing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
 
-- [Removing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#delete-authenticators)
+- [Request and confirm email challenge.](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa/enroll-and-challenge-email-authenticators)
 
+- [Request and conirm push notification challenge.](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa/enroll-and-challenge-push-authenticators)
 
+- [Enroll OTP authenticator](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa/enroll-and-challenge-otp-authenticators)
+
+- [Remove MFA authenticators](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api)
 
 ## Project setup
 
@@ -98,7 +102,7 @@ npm run test:integration
 
 ## Author
 
-[Auth0](https://auth0.com)
+[Auth0](https://auth0.com) & Jonathan Rovner
 
 ## License
 
