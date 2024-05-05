@@ -7,7 +7,6 @@ import Qrcode from "./Qrcode";
 
 const FactorsManager = ({token, factors, setFactors}) => {
 
-//const [factors, setFactors ] = useState([])
 const [barcode_uri, setBarcode] = useState("")
 const [number, setNumber] = useState("")
 const [access_token, setToken] = useState("")
@@ -35,6 +34,7 @@ const enrollDevice = async () => {
     const newfactors = await axios.post('/api/mfa/list-factors', {token})
     //console.log("new factors?", newfactors.data.factors);
     setFactors(newfactors.data.factors)
+    setEnrollment({})
   }
 }
 
@@ -56,20 +56,17 @@ return (
   <div className="">
       {
         access_token !== "" 
-        ? <div className=""> Authorized </div>
-        : <div className="">NOT authorized</div>
+        ? <div className="bg-success text-light text-center mb-2"> Authorized </div>
+        : <div className="bg-danger text-light text-center mb-2">NOT authorized</div>
       }
-      <h4>Enrolled authenticators</h4>
-      <div className="container p-2">
-        <div className="row">
-
+      <h4 className="text-center pt-2">Enrolled authenticators</h4>
+      
+      <div className="row mx-2">
       {
         factors.map(factor => <Factor factor={factor} />)
       }
-
-        </div>
-
       </div>
+      
       {
         factors.find(f => f.authenticator_type == 'otp') 
         ? <Device factors={factors}/>

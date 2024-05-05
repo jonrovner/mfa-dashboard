@@ -102,7 +102,7 @@ npm run test:integration
 
 ## Author
 
-[Auth0](https://auth0.com) & Jonathan Rovner
+[Auth0](https://auth0.com) & [Jonathan Rovner](https://github.com/jonrovner)
 
 ## License
 

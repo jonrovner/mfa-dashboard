@@ -27,6 +27,7 @@ const NavBar = () => {
       <Navbar color="light" light expand="md">
         <Container>
           <NavbarBrand className="logo" />
+          <div className='display-6'>MFA DASHBOARD</div>
           <NavbarToggler onClick={toggle} data-testid="navbar-toggle" />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar data-testid="navbar-items">
