@@ -6,8 +6,7 @@ Auth0 provides a built-in multi-factor authentication (MFA) enrollment and authe
 
 The [MFA API](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/mfa-api) allows you to build an interface to let users manage their own authentication factors.
 
-To use the MFA API, you must enable the MFA grant type for your application. To enable the MFA grant in the Auth0 Dashboard, go to Dashboard > Applications > Advanced Settings > Grant Types and select MFA. See Enable Multi-Factor Authentication for details.
-
+To use the MFA API, you must enable the MFA grant type for your application in Auth0 Dashboard. 
 
 This sample demonstrates the following use cases:
 
@@ -50,10 +49,10 @@ AUTH0_CLIENT_ID='YOUR_AUTH0_CLIENT_ID'
 AUTH0_CLIENT_SECRET='YOUR_AUTH0_CLIENT_SECRET'
 # Your Auth0 API's Identifier 
 # OMIT if you do not want to use the API part of the sample
-AUTH0_AUDIENCE='YOUR_AUTH0_API_IDENTIFIER'
+AUTH0_AUDIENCE=AUTH_ISSUER_BASE_URL+'/mfa/'
 # The permissions your app is asking for
 # OMIT if you do not want to use the API part of the sample
-AUTH0_SCOPE='openid profile email read:shows'
+AUTH0_SCOPE='openid profile list:authenticators remove:authenticators enroll'
 ```
 
 **Note**: Make sure you replace `AUTH0_SECRET` with your own secret (you can generate a suitable string using `openssl rand -hex 32` on the command line).
@@ -75,23 +74,6 @@ npm run dev
 ```bash
 npm run build
 ```
-
-### Docker build
-
-To build and run the Docker image, run `exec.sh`, or `exec.ps1` on Windows.
-
-### Run the unit tests
-
-```bash
-npm run test
-```
-
-### Run the integration tests
-
-```bash
-npm run test:integration
-```
-
 
 ## Author
 
