@@ -13,7 +13,7 @@ This sample demonstrates the following use cases:
 
 - [Authenticate with ROPG to query Auth0 MFA API](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa)
 
-- [Showing enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
+- [List enrolled authenticators.](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api#list-authenticators)
 
 - [Request and confirm email challenge.](https://auth0.com/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa/enroll-and-challenge-email-authenticators)
 
