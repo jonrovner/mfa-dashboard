@@ -1,4 +1,4 @@
-# Auth0 Next.js SDK Sample Application
+# MFA Dashboard Sample Application with Auth0 Next.js SDK
 
 This sample demonstrates the integration of [Auth0 Next.js SDK](https://github.com/auth0/nextjs-auth0) into a MFA DASHBOARD application created using [create-next-app](https://nextjs.org/docs/api-reference/create-next-app). 
 
