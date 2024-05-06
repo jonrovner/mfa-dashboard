@@ -4,11 +4,10 @@ const Device = ({factors}) => {
 
     const factor = factors.find(f => f.name)
      
-    return ( <div className="hero my-5 text-center" data-testid="hero">
-        <h5 className="text-center"> Enrolled Device</h5>
-        <h2 className="mb-4" data-testid="hero-title">
-         {factor.name}
-        </h2>
+    return ( 
+    <div className="hero my-2 text-center">
+        <h6 className="text-center"> Enrolled Device {factor.name}</h6>
+        
       </div>
     );
 }

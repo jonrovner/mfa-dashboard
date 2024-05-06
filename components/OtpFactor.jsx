@@ -23,8 +23,8 @@ const OtpFactor = ({token, setToken}) => {
 
     //console.log("FACTOR IN OTP COMPONENT ", factor);
     return(
-        <div className="card mx-2 mb-2 p-2">
-            <h6 className="card-title text-dark text-center">OTP is enabled</h6>
+        <div className="p-2">
+            
             <button className="btn btn-primary mb-2" onClick={onChallengeRequest}>Challenge OTP</button>    
             {
                 (oob !== '') &&
@@ -32,15 +32,9 @@ const OtpFactor = ({token, setToken}) => {
                     <label htmlFor="otp">enter your otp</label>
                     <input id="otp" className="mb-2" type="text" onChange={handleOTP} />
                     <div className="btn btn-primary mb-1" onClick={onSubmitCode}>submit</div>
-
-                    
                 </div>
-
-
             }
-            
-            
-            <p className="alert alert-danger">If you delete this factor, push notifications will also be deleted</p>
+           
         </div>
     )   
 }

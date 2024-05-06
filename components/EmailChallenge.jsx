@@ -24,9 +24,9 @@ const EmailChalenge = ({ token, setToken}) => {
 
     
     return (
-    <div >
-        <p>Your email is enabled for MFA</p>
-        <button className="btn btn-primary mb-2" onClick={onChallengeRequest}>send OTP to email</button>    
+    <div className="p-2">
+       
+        <button className="btn btn-primary" onClick={onChallengeRequest}>send OTP to email</button>    
         {
         (oob_code !== '') &&
 

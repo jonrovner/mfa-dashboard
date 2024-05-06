@@ -73,6 +73,8 @@ return (
         ? <Device factors={factors}/>
         : ""
       }
+      <div className="d-flex justify-content-center">
+
       {
         factors.find( f => f.oob_channel == "email") && !access_token
         ? <EmailChalenge 
@@ -87,10 +89,11 @@ return (
         ? <OtpFactor token={token} setToken={setToken}/>
         :""
       }
-      {
-        (access_token !== '') &&
-        <button className="btn btn-primary mb-2" onClick={enrollDevice}>enroll device</button>
-      }
+
+
+      </div>
+      
+      
       {
         enrollmentResponse.recovery_codes && enrollmentResponse.recovery_codes.length > 0 &&
         <div>Your device is enrolled, save this recovery code: {enrollmentResponse.recovery_codes[0]}</div>
@@ -118,6 +121,7 @@ return (
           <label htmlFor="factorID">enter factor id to remove</label>
           <input type="text" onChange={(e) => setFactorId(e.target.value)} />
           <button onClick={deleteFactor}>submit</button>
+          <button className="btn btn-primary mb-2" onClick={enrollDevice}>enroll device</button>
         </div>
 
       }
