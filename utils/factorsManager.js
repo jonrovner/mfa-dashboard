@@ -37,6 +37,32 @@ export const chanllengeWithPush = async (factor, token) => {
     } catch(e){console.log("ERROR CHALLENGING > ", e);}
 }
 
+export const challengeWithOTP = async (token, factor) => {
+
+  let challenge = {
+    method: 'POST',
+    url: process.env.AUTH0_ISSUER_BASE_URL+'/mfa/challenge',
+    data: {
+      client_id: process.env.AUTH0_CLIENT_ID,
+      client_secret: process.env.AUTH0_CLIENT_SECRET,
+      challenge_type: 'otp',
+      mfa_token: token,
+      authenticator_id: factor.id
+    }
+  };
+  try {
+
+    const response = await axios.request(challenge)
+    console.log("RESPONSE FROM AUTH0", response.data);
+    return response.data
+
+  }
+  catch(error) {
+    console.error("ERROR REQUESTING OTP CHALLENGE", error);
+  };
+
+}
+
 export const verifyOTP = async (token, otp) => {
 
   const verifyRequest = {
@@ -53,6 +79,7 @@ export const verifyOTP = async (token, otp) => {
 
   try {
     const {data} = await axios.request(verifyRequest)
+    console.log("RESPONSE FROM AUTH0", data);
     return data
 
   } catch (e) {

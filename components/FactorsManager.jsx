@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Factor from "./Factor";
 import EmailChalenge from "./EmailChallenge";
+import OtpFactor from "./OtpFactor";
 import Device from "./Device";
 import Qrcode from "./Qrcode";
 
 const FactorsManager = ({token, factors, setFactors}) => {
 
 const [barcode_uri, setBarcode] = useState("")
-const [number, setNumber] = useState("")
+//const [number, setNumber] = useState("")
 const [access_token, setToken] = useState("")
 const [enrollmentResponse, setEnrollment] = useState({})
 const [factorID, setFactorId] = useState("")
@@ -49,7 +50,7 @@ const deleteFactor = async () => {
   }
 }
 
-console.log("factors : ", factors);
+//console.log("factors : ", factors);
 
 
 return (
@@ -82,6 +83,11 @@ return (
         : ""
       }
       {
+        factors.find(f => f.authenticator_type == 'otp') && !access_token
+        ? <OtpFactor token={token} setToken={setToken}/>
+        :""
+      }
+      {
         (access_token !== '') &&
         <button className="btn btn-primary mb-2" onClick={enrollDevice}>enroll device</button>
       }
@@ -109,7 +115,7 @@ return (
         access_token &&
         <div>
           <h4>Danger zone</h4>
-          <label htmlFor="factorID">enter facotr id to remove</label>
+          <label htmlFor="factorID">enter factor id to remove</label>
           <input type="text" onChange={(e) => setFactorId(e.target.value)} />
           <button onClick={deleteFactor}>submit</button>
         </div>

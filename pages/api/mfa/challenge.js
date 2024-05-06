@@ -1,4 +1,4 @@
-import {listFactors, challengeWithEmail, chanllengeWithPush} from '../../../utils/factorsManager'
+import {listFactors, challengeWithEmail, chanllengeWithPush, challengeWithOTP} from '../../../utils/factorsManager'
 
 export default async function handler(req, res) {
   
@@ -21,6 +21,11 @@ export default async function handler(req, res) {
         res.status(200).send({data})
 
 
+      }
+      if (type == 'otp'){
+        const factor = factors.find(f => f.authenticator_type == 'otp')
+        const data = await challengeWithOTP(token, factor)
+        res.status(200).send({data})
       }
       
       

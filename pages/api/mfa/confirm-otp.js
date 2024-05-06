@@ -4,9 +4,9 @@ export default async function handler(req,res){
 
     const {token, otp} = req.body;
 
-    const response = await verifyOTP(token, otp)
+    const data = await verifyOTP(token, otp)
 
-    res.status(200).send(response)
+    res.status(200).send({data})
 
 
 }
