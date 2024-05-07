@@ -22,7 +22,6 @@ const EmailChalenge = ({ token, setToken}) => {
         setCode("")
     }
 
-    
     return (
     <div className="p-2">
        
@@ -40,12 +39,7 @@ const EmailChalenge = ({ token, setToken}) => {
                     onClick={onSubmitCode}>submit code
                 </button>
             </div>
-
         }
-
-        <br />
-        <br />
-        <br />
     </div>
    )
    

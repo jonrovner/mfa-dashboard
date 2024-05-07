@@ -50,9 +50,6 @@ const deleteFactor = async () => {
   }
 }
 
-//console.log("factors : ", factors);
-
-
 return (
   <div className="">
       {
@@ -67,14 +64,12 @@ return (
         factors.map(factor => <Factor factor={factor} />)
       }
       </div>
-      
       {
         factors.find(f => f.authenticator_type == 'otp') 
         ? <Device factors={factors}/>
         : ""
       }
       <div className="d-flex justify-content-center">
-
       {
         factors.find( f => f.oob_channel == "email") && !access_token
         ? <EmailChalenge 
@@ -89,15 +84,10 @@ return (
         ? <OtpFactor token={token} setToken={setToken}/>
         :""
       }
-
-
       </div>
-      
-      
       {
         enrollmentResponse.recovery_codes && enrollmentResponse.recovery_codes.length > 0 &&
         <div>Your device is enrolled, save this recovery code: {enrollmentResponse.recovery_codes[0]}</div>
-
       }
     {/*  <div className="btn btn-primary mb-2" onClick={()=>{enroll("oob")}}>ENROLL NEW DEVICE</div>
       */} 
@@ -105,25 +95,22 @@ return (
       {/* <label htmlFor="phone">enter phone number to enroll sms</label>
       <input type="text" id="phone" onChange={(e)=>setNumber(e.target.value)}/>
       <div className="btn btn-primary mb-2" onClick={()=>{enrollSms()}}>submit</div> */}
-      
       {
         barcode_uri &&  
         <>
           <Qrcode barcode_uri={barcode_uri} />
-          
         </>
       }
-
       {
         access_token &&
-        <div>
-          <h4>Danger zone</h4>
+        <div className="d-flex flex-column justify-content-center">
+          <h5 className="text-center text-danger mt-2">Danger zone</h5>
           <label htmlFor="factorID">enter factor id to remove</label>
           <input type="text" onChange={(e) => setFactorId(e.target.value)} />
-          <button onClick={deleteFactor}>submit</button>
-          <button className="btn btn-primary mb-2" onClick={enrollDevice}>enroll device</button>
+          <button className="" onClick={deleteFactor}>delete</button>
+          <br />
+          <button className="btn btn-primary mb-2" onClick={enrollDevice}>Enroll Device</button>
         </div>
-
       }
   </div> 
   );
