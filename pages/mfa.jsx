@@ -45,6 +45,7 @@ import {  withPageAuthRequired } from '@auth0/nextjs-auth0';
     
     : <MfaLoginForm handleSubmit={handleSubmit} />  
     }
+    
   </>)
 }
 export default withPageAuthRequired(MFAlogin)

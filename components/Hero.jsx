@@ -9,6 +9,8 @@ const Hero = () => (
     
     <br />
     <a href="/mfa">Log in with your Password</a>
+    <br />
+    <a href="/api/mfa/login-universal">Log in with Auth0</a>
 
 
     

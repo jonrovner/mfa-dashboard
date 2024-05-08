@@ -4,8 +4,8 @@ export default async function handler(req, res) {
     try{
         await handleLogin(req, res,{
             authorizationParams: {
-              audience: process.env.AUTH0_ISSUER_BASE_URL + '/mfa/',
-              scope: 'openid read:authenticators remove:authenticators'
+             // audience: process.env.AUTH0_ISSUER_BASE_URL + '/mfa/',
+             // scope: 'openid read:authenticators remove:authenticators'
             },
             returnTo: '/mfa'})
             
