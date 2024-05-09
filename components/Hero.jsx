@@ -8,6 +8,7 @@ const Hero = () => (
     </h2>
     
     <br />
+    <p>If you're new to this application you need to sign-up with email and passowrd, then log in again with your credentials</p>
     <a href="/mfa">Log in with your Password</a>
     <br />
     <a href="/api/mfa/login-universal">Log in with Auth0</a>
