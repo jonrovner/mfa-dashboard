@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Qrcode from "./Qrcode";
+
 
 
 const EmailChalenge = ({ token, setToken}) => {

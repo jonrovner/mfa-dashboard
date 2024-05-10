@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Factor from "./Factor";
 import EmailChalenge from "./EmailChallenge";
+import PushChalenge from "./PushChallenge";
 import OtpFactor from "./OtpFactor";
 import Device from "./Device";
 import Qrcode from "./Qrcode";
@@ -84,6 +85,10 @@ return (
         factors.find(f => f.authenticator_type == 'otp') && !access_token
         ? <OtpFactor token={token} setToken={setToken}/>
         :""
+      }
+      {
+        factors.find(f => f.id.slice(0,4) == 'push') && !access_token && <PushChalenge token={token} setToken={setToken} />
+
       }
       </div>
       {

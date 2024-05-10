@@ -1,4 +1,4 @@
-import {listFactors, challengeWithEmail, chanllengeWithPush, challengeWithOTP} from '../../../utils/factorsManager'
+import {listFactors, challengeWithEmail, chanllengeWithPush, challengeWithOTP, pollForToken} from '../../../utils/factorsManager'
 
 export default async function handler(req, res) {
   
@@ -18,7 +18,9 @@ export default async function handler(req, res) {
       if (type == 'push'){
         const factor = factors.find(f => f.oob_channel == 'auth0')
         const data = await chanllengeWithPush(factor, token)
-        res.status(200).send({data})
+        console.log("RESPONSE FROM CHALLENGE", data);
+        const access_token = await pollForToken(data.oob_code, token)
+        res.status(200).json({access_token})
 
 
       }
