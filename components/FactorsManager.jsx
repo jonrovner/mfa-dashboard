@@ -111,11 +111,13 @@ return (
         access_token &&
         <div className="d-flex flex-column justify-content-center">
           <h5 className="text-center text-danger mt-2">Danger zone</h5>
-          <label htmlFor="factorID">enter factor id to remove</label>
-          <input type="text" onChange={(e) => setFactorId(e.target.value)} value={factorID}/>
-          <button className="" onClick={deleteFactor}>delete</button>
+          
+          <label htmlFor="factorID">Enter factor id to remove</label>
+          <input className="w-50" type="text" onChange={(e) => setFactorId(e.target.value)} value={factorID}/>
+          <button className="w-25 btn btn-danger mt-3" onClick={deleteFactor}>Delete</button>
           <br />
-          <button className="btn btn-primary mb-2" onClick={enrollDevice}>Enroll Device</button>
+          <button className="btn btn-primary mb-2 w-50" onClick={enrollDevice}>Enroll Device</button>
+          
         </div>
       }
   </div> 
