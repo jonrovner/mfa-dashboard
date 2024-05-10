@@ -11,7 +11,7 @@ const Hero = () => (
     <p>If you're new to this application you need to sign-up with email and password, then log in again with your credentials</p>
     <a href="/mfa">Log in with your Password</a>
     <br />
-    <a href="/api/mfa/login-universal">Log in with Auth0</a>
+    <a href="/api/mfa/login-universal">Sign up with Auth0</a>
 
 
     

@@ -46,6 +46,7 @@ const deleteFactor = async () => {
     const newfactors = await axios.post('/api/mfa/list-factors', {token})
     //console.log("new factors?", newfactors.data.factors);
     setFactors(newfactors.data.factors)
+    setFactorId("")
 
   }
 }
@@ -55,7 +56,7 @@ return (
       {
         access_token !== "" 
         ? <div className="bg-success text-light text-center mb-2"> Authorized </div>
-        : <div className="bg-danger text-light text-center mb-2">NOT authorized</div>
+        : <div className="bg-danger text-light text-center mb-2">NOT authorized: you need to complete MFA challenge to perform any changes</div>
       }
       <h4 className="text-center pt-2">Enrolled authenticators</h4>
       
@@ -106,7 +107,7 @@ return (
         <div className="d-flex flex-column justify-content-center">
           <h5 className="text-center text-danger mt-2">Danger zone</h5>
           <label htmlFor="factorID">enter factor id to remove</label>
-          <input type="text" onChange={(e) => setFactorId(e.target.value)} />
+          <input type="text" onChange={(e) => setFactorId(e.target.value)} value={factorID}/>
           <button className="" onClick={deleteFactor}>delete</button>
           <br />
           <button className="btn btn-primary mb-2" onClick={enrollDevice}>Enroll Device</button>
