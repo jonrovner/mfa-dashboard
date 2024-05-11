@@ -1,13 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 
-
-
 const EmailChalenge = ({ token, setToken}) => {
 
     const [code, setCode] = useState("")
     const [oob_code, setOob] = useState("")
-   
 
     const onChallengeRequest = async () => {
         const response = await axios.post('/api/mfa/challenge', {token:token, type:'email'})
