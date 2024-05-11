@@ -18,9 +18,8 @@ const PushChalenge = ({ token, setToken}) => {
 
     return (
     <div className="p-2">
+        <button className="btn btn-primary" onClick={onChallengeRequest}>Send Notification to Device</button>    
        
-        <button className="btn btn-primary" onClick={onChallengeRequest}>push notification to device</button>    
-        
     </div>
    )
    

@@ -25,12 +25,12 @@ const EmailChalenge = ({ token, setToken}) => {
     return (
     <div className="p-2">
        
-        <button className="btn btn-primary" onClick={onChallengeRequest}>send OTP to email</button>    
+        <button className="btn btn-primary" onClick={onChallengeRequest}>Send OTP to email</button>    
         {
         (oob_code !== '') &&
 
             <div>
-                <label htmlFor="id">enter the code sent to your email</label>
+                <label htmlFor="id">Enter the code sent to your email</label>
                 <input id="code" type="text" onChange={(e)=>setCode(e.target.value)}/>
                 <br />
                 <button 
