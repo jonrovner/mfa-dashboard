@@ -71,7 +71,10 @@ return (
         ? <Device factors={factors}/>
         : ""
       }
-        <h4 className="text-center">Available challenges</h4>
+      {
+        !access_token && <h4 className="text-center">Available challenges</h4>
+      }
+        
       <div className="d-flex justify-content-center">
       {
         factors.find( f => f.oob_channel == "email") && !access_token

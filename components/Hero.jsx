@@ -9,7 +9,6 @@ const Hero = () => (
     <p>This application shows the use of Auth0's MFA API to allow users to control their MFA authentication factors</p>
     <br />
     <p className='text-small'>If you're new to this application you need to sign-up with email and password, then log in again with your credentials</p>
-    <a href="/mfa">Log in with your Password</a>
     <br />
     <a href="/api/mfa/login-universal">Sign up with Auth0</a>
 

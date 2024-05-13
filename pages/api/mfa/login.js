@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-      console.log("REQ BODY", req.body)
+      //console.log("REQ BODY", req.body)
       
       const mfaTokenRequest = {
         method: 'POST',
